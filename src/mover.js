@@ -1,21 +1,16 @@
-function Mover(p, loc, vel) {
-	this.location = new p.PVector(loc.x, loc.y)
-	this.velocity = new p.PVector(vel.vx, vel.vy);
+function Mover(p, loc) {
+	this.location = loc;
+	this.velocity = new p.PVector();
 	this.acceleration = new p.PVector();
-	this.topspeed = 3;
-	this.time = 0;
+	this.mass = 5;
 }
 
 Mover.prototype.update = function() {
-	this.speedupX = p.map(p.noise(this.time), 0, 1, -2, 2);
-	this.speedupY = p.map(p.noise(this.time + 300), 0, 1, -2, 2);
-	//this.acceleration.add(new p.PVector(this.speedupX, this.speedupY));	
 
 	this.velocity.add(this.acceleration);
- 	this.velocity.limit(this.topspeed);
 	this.location.add(this.velocity);
 
-	this.time += 0.4;
+	this.acceleration.mult(0);
 }
 
 Mover.prototype.checkEdges = function() {
@@ -28,6 +23,20 @@ Mover.prototype.checkEdges = function() {
 	}
 }
 
+Mover.prototype.applyForce = function(force) {
+	var f = force.get();
+	f.div(this.mass);
+	this.acceleration.add(f);	
+}
 
+Mover.prototype.drag = function(dragCoefficient) {
+	var speed = this.velocity.mag();
+	var dragMagnitude = dragCoefficient * speed * speed;
+	var drag = this.velocity.get();
+	drag.mult(-1);
+	drag.normalize();
+	drag.mult(dragMagnitude);
+	this.applyForce(drag);
+}
 
 
