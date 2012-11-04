@@ -7,7 +7,7 @@ class Pipe {
   float angle = 0;
   
   Pipe() {
-    location = new PVector(10, height - 10- pipeHeight);
+    location = new PVector(10 + pipeWidth / 2, height - 10 - pipeHeight / 2);
   } 
   
   void display() {
@@ -18,8 +18,10 @@ class Pipe {
     rectMode(CENTER);
     translate(location.x, location.y);
     rotate(radians(-1 * angle));
-    rect(20, 0, pipeWidth, pipeHeight);
+    rect(0, 0, pipeWidth, pipeHeight);
     popMatrix();
+    
+    rect(location.x, location.y + pipeHeight, 10, 40);
   } 
   
   void update() {
