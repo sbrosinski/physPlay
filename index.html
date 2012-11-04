@@ -3,17 +3,15 @@
 	<head>
 		<title></title>
 		<script src="lib/processing-1.4.1.js"></script> 
-		<script src="src/mover.js"></script> 
-		<script src="src/cannon.js"></script> 
 		<style>
 			canvas { border: 1px solid #666; margin: 20px;}
 		</style>
 	</head>
 	<body>
-		<canvas id="bouncyBallCanvas"></canvas>
+		<canvas id="bouncyBallCanvas" data-processing-sources="src/cannon/Mover.pde src/cannon/cannon.pde"></canvas>
 		<script>
-			var canvas = document.getElementById("bouncyBallCanvas");
-			var p = new Processing(canvas, cannon);
+			//var canvas = document.getElementById("bouncyBallCanvas");
+			//var p = new Processing(canvas, cannon);
 			// p.exit()
 		</script>
 	</body>	
