@@ -2,34 +2,39 @@
 Pipe pipe;
 ArrayList<Ball> balls = new ArrayList<Ball>();
 boolean hasFired = false;
+float maxPower = 50, minPower = 1, power = minPower;
+boolean mouseIsPressed;
 
 void setup() {
 	size(400,200);
 	pipe = new Pipe();
 }
 
-void mouseClicked() {
-	balls.add(new Ball(pipe.angle));
+void mousePressed() {
+  mouseIsPressed = true;
+}
+
+void mouseReleased() {
+  mouseIsPressed = false;
+  pipe.fireAway();
+  pipe.resetPower();
 }
 
 void keyPressed() {
-	balls.add(new Ball(pipe.angle));
+  pipe.increasePower();
+}
+
+void keyReleased() {
+  pipe.fireAway();
+  pipe.resetPower();
 }
 
 void draw() {
 	background(255);
-	Iterator<Ball> it = balls.iterator();
-  	while (it.hasNext()) {
-  		Ball ball = it.next();
-  		ball.display();
-  		// this doesn't work in processing-js, investigate
-  		//if (ball.isDead) it.remove();
-  		
-  	}
-
- 	pipe.update();
-  	pipe.display();
-			
+	
+if (mouseIsPressed) pipe.increasePower();
+  pipe.update();
+  pipe.display();
 }
 
 
