@@ -29,7 +29,7 @@ class Pipe {
     for (int i = balls.size()- 1; i >= 0; i--) {
       Ball ball = balls.get(i);
       ball.display();
-      if (ball.isDead) balls.remove(i);
+      if (ball.isDead()) balls.remove(i);
     }    
   }
   
