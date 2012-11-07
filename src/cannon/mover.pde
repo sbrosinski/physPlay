@@ -7,7 +7,7 @@ class Mover {
 
   Mover() {
     mass = 1;
-    location = new PVector(10, height - 10);
+    location = new PVector(30, height - 20);
     velocity = new PVector(0,0);
     acceleration = new PVector(0,0);
   }
@@ -47,11 +47,10 @@ class Mover {
   void display() {
     stroke(0);
     fill(175);
-    // Let’s scale the size of the object according to its mass.
+    //  scale the size of the object according to its mass.
     ellipse(location.x,location.y,mass*16,mass*16);
   }
 
-  // Somewhat arbitrarily, we are deciding that an object bounces when it hits the edges of a window.
   void checkEdges() {
     if (location.x > width) {
       location.x = width;
@@ -62,8 +61,6 @@ class Mover {
     }
 
     if (location.y > height) {
-      // Even though we said we shouldn't touch location and velocity directly, there are some exceptions.
-      // Here we are doing so as a quick and easy way to reverse the direction of our object when it reaches the edge.
       velocity.y *= -1;
       location.y = height;
     }
