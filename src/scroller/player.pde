@@ -1,6 +1,6 @@
 class Player {
  
- float posY, posX = 50; 
+ float posY, posX = 100; 
  PVector location;
  PVector velocity;
  PVector acceleration;
@@ -8,13 +8,14 @@ class Player {
  boolean airborne = false, bounce = false;;
  
  Player() {
-   location = new PVector(50, 0);
+   location = new PVector(100, 0);
    velocity = new PVector(0,0);
    acceleration = new PVector(0,0);   
  }
  
  void update(PVector lineVector) {
-   applyForce(new PVector(0, 0.2)); // gravity
+  println(velocity);
+
    
    velocity.add(acceleration);
    location.add(velocity);
@@ -22,14 +23,21 @@ class Player {
  
    // collision with ground line, don't fall below!
    if (location.y >= lineVector.y - 8) {
-     if (airborne) {
-        airborne = false; // we landed on the line 
-        println("landed");
+ 
+   
         location.y = lineVector.y - 8; 
-     } else {
-       location.y = lineVector.y - 8; 
+   
   
-     }
+  
+   } else if (location.y < 0) {
+      // collision with top, bounce back down
+      location.y = 0;
+      applyForce(new PVector(0, 3)); // gravity
+   }
+   else  
+   {
+      // in air apply gravity  
+   applyForce(new PVector(0, 0.05)); // gravity
    }
  }
  
@@ -45,11 +53,10 @@ class Player {
   }
   
  void jump() {
-   if (!airborne) {
-     airborne = true;
+ 
      println("jump!");
-     applyForce(new PVector(0, -40));
-   }
+     applyForce(new PVector(0, -5));
+  
  }
   
   

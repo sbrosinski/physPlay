@@ -37,8 +37,8 @@ void draw() {
     // Increment xoff
     xoff += 0.008;
 
-    if (i <= player.posX && player.posX <= i+5) {
-      player.update(new PVector(50, y1));
+   if (i <= player.posX && player.posX <= i+5) {
+      player.update(new PVector(100, y1));
     }
     player.display();
     
